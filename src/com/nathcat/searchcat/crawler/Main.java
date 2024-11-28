@@ -58,7 +58,7 @@ public class Main {
         }
 
         SearchIndex index = new SearchIndex();
-        Crawler crawler = new Crawler("https://www.wikipedia.org/", index);
+        Crawler crawler = new Crawler(startURL, index);
 
         // Don't want to run this as a thread right now
         crawler.run();
