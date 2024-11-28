@@ -1,6 +1,7 @@
 package com.nathcat.searchcat.crawler;
 
 import com.nathcat.searchcat.crawler.exceptions.InvalidConfigException;
+import com.nathcat.searchcat.index.SearchIndex;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -56,6 +57,10 @@ public class Main {
             throw new InvalidConfigException("Required config param \"start-url\" was not found.");
         }
 
+        SearchIndex index = new SearchIndex();
+        Crawler crawler = new Crawler("https://www.wikipedia.org/", index);
 
+        // Don't want to run this as a thread right now
+        crawler.run();
     }
 }

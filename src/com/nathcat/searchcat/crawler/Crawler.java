@@ -1,5 +1,6 @@
 package com.nathcat.searchcat.crawler;
 
+import com.nathcat.searchcat.index.SearchIndex;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -13,7 +14,7 @@ public class Crawler extends Thread {
     /**
      * Represents a page visited by the crawler
      */
-    private static class Page {
+    public static class Page {
         /**
          * The URL of the page
          */
@@ -95,14 +96,16 @@ public class Crawler extends Thread {
      */
     private final String startURL;
     private final Stack<Page> state;
+    public SearchIndex searchIndex;
 
     /**
      * Sets up the crawler
      * @param startURL The URL the crawler should start at
      * @throws IOException Thrown if JSoup fails to access <code>startURL</code>
      */
-    public Crawler(String startURL) throws IOException {
+    public Crawler(String startURL, SearchIndex searchIndex) throws IOException {
         this.startURL = startURL;
+        this.searchIndex = searchIndex;
         this.state = new Stack<>();
 
         this.state.push(new Page(this.startURL));
